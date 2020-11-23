@@ -1,5 +1,9 @@
 package com.kamijoucen.kirauid;
 
-public class UidGenerator {
+public interface UidGenerator {
+
+    long nextId();
+
+    long[] parseId();
 
 }

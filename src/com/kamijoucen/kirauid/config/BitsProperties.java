@@ -4,6 +4,8 @@ public enum BitsProperties {
 
     TIME,
     SEQUENCE,
-    CUSTOM
+    WORKER,
+    CUSTOM,
+    ;
 
 }

@@ -1,22 +1,31 @@
 package com.kamijoucen.kirauid.config;
 
+import com.kamijoucen.kirauid.domain.BitPart;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class BitsConfig {
 
-    public final UidType type;
+    private int allBits = 0;
 
-    public BitsConfig(UidType type) {
-        this.type = type;
-    }
+    private List<BitPart> parts = new ArrayList<BitPart>();
 
-    public void addPart(BitsProperties prop) {
+    public boolean addPart(BitsProperties prop) {
+
+        return true;
     }
 
     public void addPart(BitsProperties prop, int length) {
+
     }
 
-    public enum UidType {
-        LONG,
-        STRING
+    public static BitsConfig defaultConfig() {
+        BitsConfig config = new BitsConfig();
+        config.addPart(BitsProperties.TIME);
+        config.addPart(BitsProperties.WORKER);
+        config.addPart(BitsProperties.SEQUENCE);
+        return config;
     }
 
 }
