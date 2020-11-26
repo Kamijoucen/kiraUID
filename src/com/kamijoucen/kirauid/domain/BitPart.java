@@ -5,6 +5,9 @@ import com.kamijoucen.kirauid.config.BitsProperties;
 public class BitPart {
 
     private BitsProperties bitsProperties;
+
+    private int customIndex = -1;
+
     /**
      * 二进制段长度
      */
@@ -28,7 +31,7 @@ public class BitPart {
     public BitPart(long length, long baseBits, BitsProperties properties) {
         this.bits = length;
         this.maxBit = ~(-1 << length);
-        this.bitShift = length + baseBits;
+        this.bitShift = baseBits;
         this.bitsProperties = properties;
     }
 
@@ -54,5 +57,13 @@ public class BitPart {
 
     public void setData(long data) {
         this.data = data;
+    }
+
+    public int getCustomIndex() {
+        return customIndex;
+    }
+
+    public void setCustomIndex(int customIndex) {
+        this.customIndex = customIndex;
     }
 }

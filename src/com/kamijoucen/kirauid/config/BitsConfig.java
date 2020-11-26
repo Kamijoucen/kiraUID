@@ -1,6 +1,7 @@
 package com.kamijoucen.kirauid.config;
 
 import com.kamijoucen.kirauid.domain.BitPart;
+import com.kamijoucen.kirauid.impl.CustomGenerator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +12,8 @@ public class BitsConfig {
 
     private Map<BitsProperties, Long> defaultBits = new HashMap<BitsProperties, Long>();
     private List<BitPart> parts = new ArrayList<BitPart>();
+    private long twepoch = 0;
+    int customIndex = -1;
 
     private long bits = 0;
 
@@ -20,17 +23,20 @@ public class BitsConfig {
         defaultBits.put(BitsProperties.CUSTOM, 10L);
     }
 
-    public boolean addPart(BitsProperties prop) {
-        return addPart(prop, defaultBits.get(prop));
+    public void addPart(BitsProperties prop) {
+        addPart(prop, defaultBits.get(prop));
     }
 
-    public boolean addPart(BitsProperties prop, long length) {
+    public void addPart(BitsProperties prop, long length) {
         if ((length + bits) > 63) {
-            return false;
+            throw new RuntimeException("too long!!!");
         }
-        parts.add(new BitPart(length, bits, prop));
         bits += length;
-        return true;
+        BitPart part = new BitPart(length, 63 - bits, prop);
+        if (prop == BitsProperties.CUSTOM) {
+            part.setCustomIndex(++customIndex);
+        }
+        parts.add(part);
     }
 
     public static BitsConfig defaultConfig() {
@@ -43,5 +49,13 @@ public class BitsConfig {
 
     public List<BitPart> getParts() {
         return parts;
+    }
+
+    public long getTwepoch() {
+        return twepoch;
+    }
+
+    public void setTwepoch(long twepoch) {
+        this.twepoch = twepoch;
     }
 }

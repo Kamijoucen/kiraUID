@@ -25,12 +25,12 @@ public class DefaultIdGenerator extends PartGenAdapter {
         if (currentTimestamp < lastTimestamp) {
             throw new RuntimeException();
         }
+        this.currentCustomData = args;
         List<BitPart> bitParts = allocator.getBitParts();
         for (BitPart bitPart : bitParts) {
             generators[bitPart.getBitsProperties().index].generator(bitPart, this);
         }
-
-        return 0;
+        return allocator.allocate();
     }
 
     @Override

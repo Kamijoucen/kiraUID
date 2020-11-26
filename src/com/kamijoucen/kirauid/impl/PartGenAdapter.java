@@ -16,4 +16,6 @@ public abstract class PartGenAdapter implements UidGenerator {
 
     long sequence = 0L;
 
+    long[] currentCustomData = null;
+
 }

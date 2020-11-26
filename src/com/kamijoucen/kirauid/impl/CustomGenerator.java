@@ -7,5 +7,6 @@ import com.kamijoucen.kirauid.domain.BitPart;
 public class CustomGenerator implements PartGenerator {
     @Override
     public void generator(BitPart part, PartGenAdapter generator) {
+        part.setData(generator.currentCustomData[part.getCustomIndex()]);
     }
 }
