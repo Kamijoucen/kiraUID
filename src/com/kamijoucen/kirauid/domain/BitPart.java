@@ -20,6 +20,11 @@ public class BitPart {
      */
     private long bitShift;
 
+    /**
+     * 数据
+     */
+    private long data;
+
     public BitPart(long length, long baseBits, BitsProperties properties) {
         this.bits = length;
         this.maxBit = ~(-1 << length);
@@ -37,5 +42,17 @@ public class BitPart {
 
     public long getBitShift() {
         return bitShift;
+    }
+
+    public BitsProperties getBitsProperties() {
+        return bitsProperties;
+    }
+
+    public long getData() {
+        return data;
+    }
+
+    public void setData(long data) {
+        this.data = data;
     }
 }

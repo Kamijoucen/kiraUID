@@ -1,32 +1,34 @@
 package com.kamijoucen.kirauid.impl;
 
-import com.kamijoucen.kirauid.UidGenerator;
+import com.kamijoucen.kirauid.PartGenerator;
 import com.kamijoucen.kirauid.config.BitsAllocator;
+import com.kamijoucen.kirauid.config.BitsProperties;
 import com.kamijoucen.kirauid.domain.BitPart;
+import com.kamijoucen.kirauid.util.Utils;
 
 import java.util.List;
 
-public class DefaultIdGenerator implements UidGenerator {
+public class DefaultIdGenerator extends PartGenAdapter {
 
-    private BitsAllocator allocator;
-
-    private long lastTimestamp = -1L;
-
-    private long sequence = 0L;
 
     public DefaultIdGenerator(BitsAllocator allocator) {
         this.allocator = allocator;
+        generators = new PartGenerator[BitsProperties.values().length];
+        generators[BitsProperties.TIME.index] = new TimeGenerator();
+        generators[BitsProperties.SEQUENCE.index] = new SequenceGenerator();
+        generators[BitsProperties.CUSTOM.index] = new CustomGenerator();
     }
 
     @Override
     public synchronized long nextId(long... args) {
-        long timestamp = timeGen();
-        if (timestamp < lastTimestamp) {
+        currentTimestamp = Utils.timeGen();
+        if (currentTimestamp < lastTimestamp) {
             throw new RuntimeException();
         }
-
-
         List<BitPart> bitParts = allocator.getBitParts();
+        for (BitPart bitPart : bitParts) {
+            generators[bitPart.getBitsProperties().index].generator(bitPart, this);
+        }
 
         return 0;
     }
@@ -34,19 +36,6 @@ public class DefaultIdGenerator implements UidGenerator {
     @Override
     public long[] parseId() {
         return null;
-    }
-
-
-    private long timeGen() {
-        return System.currentTimeMillis();
-    }
-
-    private long tilNextMillis(long lastTimestamp) {
-        long time = timeGen();
-        while (time <= lastTimestamp) {
-            time = timeGen();
-        }
-        return time;
     }
 
 }

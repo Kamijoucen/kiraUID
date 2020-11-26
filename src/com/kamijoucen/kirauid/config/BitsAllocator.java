@@ -14,7 +14,6 @@ public class BitsAllocator {
     }
 
     public long allocate(long time) {
-
         return 0;
     }
 

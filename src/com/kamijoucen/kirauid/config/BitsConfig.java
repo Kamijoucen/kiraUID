@@ -17,6 +17,7 @@ public class BitsConfig {
     public BitsConfig() {
         defaultBits.put(BitsProperties.TIME, 41L);
         defaultBits.put(BitsProperties.SEQUENCE, 12L);
+        defaultBits.put(BitsProperties.CUSTOM, 10L);
     }
 
     public boolean addPart(BitsProperties prop) {
