@@ -1,23 +1,25 @@
 package com.kamijoucen.kirauid.config;
 
+
 import com.kamijoucen.kirauid.domain.BitPart;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-/**
- * 需要
- */
 public class BitsAllocator {
 
-    private Map<BitsProperties, Long> defaultBits = new HashMap<BitsProperties, Long>();
-    private List<BitPart> bitParts = new ArrayList<BitPart>();
+    private BitsConfig bitsConfig;
 
     public BitsAllocator(BitsConfig bitsConfig) {
-
+        this.bitsConfig = bitsConfig;
     }
 
+    public long allocate(long time) {
+
+        return 0;
+    }
+
+    public List<BitPart> getBitParts() {
+        return this.bitsConfig.getParts();
+    }
 
 }

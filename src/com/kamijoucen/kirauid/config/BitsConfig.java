@@ -24,7 +24,7 @@ public class BitsConfig {
     }
 
     public boolean addPart(BitsProperties prop, long length) {
-        if (prop == BitsProperties.CUSTOM || (length + bits) > 63) {
+        if ((length + bits) > 63) {
             return false;
         }
         parts.add(new BitPart(length, bits, prop));
@@ -32,16 +32,15 @@ public class BitsConfig {
         return true;
     }
 
-    public boolean addCustomPart(long length) {
-
-        return false;
-    }
-
     public static BitsConfig defaultConfig() {
         BitsConfig config = new BitsConfig();
         config.addPart(BitsProperties.TIME);
+        config.addPart(BitsProperties.CUSTOM);
         config.addPart(BitsProperties.SEQUENCE);
         return config;
     }
 
+    public List<BitPart> getParts() {
+        return parts;
+    }
 }
