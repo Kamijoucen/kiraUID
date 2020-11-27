@@ -19,8 +19,7 @@ public class BitsAllocator {
 
     public long allocate() {
         long data = 0;
-        List<BitPart> parts = bitsConfig.getParts();
-        for (BitPart part : parts) {
+        for (BitPart part : bitParts) {
             data |= part.getData() << part.getBitShift();
         }
 
