@@ -26,7 +26,7 @@ public class DefaultIdGenerator extends PartGenAdapter {
             throw new RuntimeException();
         }
         this.currentCustomData = args;
-        List<BitPart> bitParts = allocator.getBitParts();
+        BitPart[] bitParts = allocator.getBitParts();
         for (BitPart bitPart : bitParts) {
             generators[bitPart.getBitsProperties().index].generator(bitPart, this);
         }

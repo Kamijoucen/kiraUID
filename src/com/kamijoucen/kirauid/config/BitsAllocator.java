@@ -9,8 +9,12 @@ public class BitsAllocator {
 
     private BitsConfig bitsConfig;
 
+    private BitPart[] bitParts;
+
     public BitsAllocator(BitsConfig bitsConfig) {
         this.bitsConfig = bitsConfig;
+        bitParts = new BitPart[bitsConfig.getParts().size()];
+        bitsConfig.getParts().toArray(bitParts);
     }
 
     public long allocate() {
@@ -24,8 +28,8 @@ public class BitsAllocator {
         return data;
     }
 
-    public List<BitPart> getBitParts() {
-        return this.bitsConfig.getParts();
+    public BitPart[] getBitParts() {
+        return bitParts;
     }
 
     public BitsConfig getBitsConfig() {

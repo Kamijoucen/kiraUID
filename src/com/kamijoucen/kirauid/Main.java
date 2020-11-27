@@ -12,16 +12,18 @@ public class Main {
     public static void main(String[] args) {
         BitsConfig bitsConfig = BitsConfig.defaultConfig();
         BitsConfig bitsConfig1 = new BitsConfig();
-        bitsConfig1.addPart(BitsProperties.TIME, 62);
-        bitsConfig1.addPart(BitsProperties.SEQUENCE, 1);
-        bitsConfig.setTwepoch(1420041600000L);
+        bitsConfig1.addPart(BitsProperties.TIME);
+        bitsConfig1.addPart(BitsProperties.CUSTOM, 5);
+        bitsConfig1.addPart(BitsProperties.CUSTOM, 5);
+        bitsConfig1.addPart(BitsProperties.SEQUENCE);
+//        bitsConfig1.setTwepoch(1420041600000L);
 
         BitsAllocator allocator = new BitsAllocator(bitsConfig1);
 
-        DefaultIdGenerator generator = new DefaultIdGenerator(allocator);
+        UidGenerator generator = new DefaultIdGenerator(allocator);
 
         for (int i = 0; i < 1000; i++) {
-            System.out.println(generator.nextId(1));
+            System.out.println(generator.nextId(1, 2));
         }
 
     }
