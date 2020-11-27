@@ -6,7 +6,6 @@ import com.kamijoucen.kirauid.config.BitsProperties;
 import com.kamijoucen.kirauid.domain.BitPart;
 import com.kamijoucen.kirauid.util.Utils;
 
-import java.util.List;
 
 public class DefaultIdGenerator extends PartGenAdapter {
 
@@ -34,8 +33,33 @@ public class DefaultIdGenerator extends PartGenAdapter {
     }
 
     @Override
-    public long[] parseId() {
-        return null;
+    public long[] parseId(long id) {
+        BitPart[] parts = this.allocator.getBitParts();
+        long[] data = new long[parts.length];
+        long curBits = 0;
+        for (int i = 0; i < parts.length; i++) {
+            BitPart part = parts[i];
+//            curBits =
+            data[i] = (id << (64 - part.getBits())) >>> (64 - part.getBits());
+        }
+        return data;
+    }
+
+    @Override
+    public boolean checkParam(long... args) {
+        BitPart[] parts = allocator.getBitParts();
+        for (BitPart part : parts) {
+            if (part.getBitsProperties() == BitsProperties.CUSTOM
+                    && check(part, args)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean check(BitPart part, long... args) {
+        return (part.getCustomIndex() >= args.length)
+                || (part.getMaxBit() < args[part.getCustomIndex()]);
     }
 
 }
