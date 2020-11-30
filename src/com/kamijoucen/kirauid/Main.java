@@ -15,7 +15,7 @@ public class Main {
         BitsConfig bitsConfig1 = new BitsConfig();
         bitsConfig1.addPart(BitsProperties.TIME);
         bitsConfig1.addPart(BitsProperties.CUSTOM, 5);
-//        bitsConfig1.addPart(BitsProperties.CUSTOM, 5);
+        bitsConfig1.addPart(BitsProperties.CUSTOM, 5);
         bitsConfig1.addPart(BitsProperties.SEQUENCE);
 //        bitsConfig1.setTwepoch(1420041600000L);
 
@@ -24,7 +24,7 @@ public class Main {
         UidGenerator generator = new DefaultIdGenerator(allocator);
 
         System.out.println(generator.checkParam(3, 15));
-        long id = generator.nextId(3, 15);
+        long id = generator.nextId(3, 19);
         System.out.println(id);
         System.out.println(Arrays.toString(generator.parseId(id)));
 //        for (int i = 0; i < 1000; i++) {

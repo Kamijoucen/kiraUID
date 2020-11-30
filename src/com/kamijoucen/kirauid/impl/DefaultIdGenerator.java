@@ -39,8 +39,7 @@ public class DefaultIdGenerator extends PartGenAdapter {
         long curBits = 0;
         for (int i = 0; i < parts.length; i++) {
             BitPart part = parts[i];
-//            curBits =
-            data[i] = (id << (64 - part.getBits())) >>> (64 - part.getBits());
+            data[i] = (id >>> part.getBitShift()) & part.getMaxBit();
         }
         return data;
     }

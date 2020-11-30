@@ -30,7 +30,7 @@ public class BitPart {
 
     public BitPart(long length, long baseBits, BitsProperties properties) {
         this.bits = length;
-        this.maxBit = ~(-1 << length);
+        this.maxBit = ~(-1L << length);
         this.bitShift = baseBits;
         this.bitsProperties = properties;
     }
