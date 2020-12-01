@@ -38,7 +38,6 @@ public class DefaultIdGenerator extends PartGenAdapter {
     public long[] parseId(long id) {
         BitPart[] parts = this.allocator.getBitParts();
         long[] data = new long[parts.length];
-        long curBits = 0;
         for (int i = 0; i < parts.length; i++) {
             BitPart part = parts[i];
             data[i] = (id >>> part.getBitShift()) & part.getMaxBit();
