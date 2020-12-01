@@ -47,3 +47,11 @@ for (int i = 0; i < 5; i++) {
 783490216609587203
 
 783490216609587204
+### 解析ID
+> 注意：解析一个ID必须使用生成该ID的generator，否则解析出的数据有误
+```java
+long[] datas = generator.parseId(783490216609587200L);
+System.out.println(Arrays.toString(datas));
+```
+#### 输出
+[186798624184, 1, 2, 0]
