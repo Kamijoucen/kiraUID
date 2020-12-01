@@ -1,7 +1,9 @@
 package com.kamijoucen.kirauid.impl;
 
 import com.kamijoucen.kirauid.PartGenerator;
+import com.kamijoucen.kirauid.UidGenerator;
 import com.kamijoucen.kirauid.config.BitsAllocator;
+import com.kamijoucen.kirauid.config.BitsConfig;
 import com.kamijoucen.kirauid.config.BitsProperties;
 import com.kamijoucen.kirauid.domain.BitPart;
 import com.kamijoucen.kirauid.util.Utils;
@@ -59,6 +61,10 @@ public class DefaultIdGenerator extends PartGenAdapter {
     public boolean check(BitPart part, long... args) {
         return (part.getCustomIndex() >= args.length)
                 || (part.getMaxBit() < args[part.getCustomIndex()]);
+    }
+
+    public static UidGenerator createDefaultGenerator() {
+        return new DefaultIdGenerator(new BitsAllocator(BitsConfig.defaultConfig()));
     }
 
 }
